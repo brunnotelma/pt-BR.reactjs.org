@@ -18,11 +18,11 @@ import React, { useState, useEffect } from 'react';
 function FriendStatus(props) {
   const [isOnline, setIsOnline] = useState(null);
 
-  function handleStatusChange(status) {
-    setIsOnline(status.isOnline);
-  }
-
   useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
     ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
     return () => {
       ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
@@ -44,11 +44,11 @@ import React, { useState, useEffect } from 'react';
 function FriendListItem(props) {
   const [isOnline, setIsOnline] = useState(null);
 
-  function handleStatusChange(status) {
-    setIsOnline(status.isOnline);
-  }
-
   useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
     ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
     return () => {
       ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
@@ -74,16 +74,16 @@ Quando queremos compartilhar lógica entre duas funções JavaScript, extraímos
 **Um Hook customizado é uma função JavaScript cujo nome começa com "`use`" e que pode utilizar outros Hooks.** Por exemplo, `useFriendStatus` abaixo é nosso primeiro Hook customizado:
 
 ```js{3}
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function useFriendStatus(friendID) {
   const [isOnline, setIsOnline] = useState(null);
 
-  function handleStatusChange(status) {
-    setIsOnline(status.isOnline);
-  }
-
   useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
     ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
     return () => {
       ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
@@ -193,7 +193,7 @@ Pelo fato de o Hook `useState` nos fornecer o último valor da variável de esta
   const isRecipientOnline = useFriendStatus(recipientID);
 ```
 
-Isto nos informa se o amigo *atualmente seleccionado* está online. Se escolhermos um amigo diferente e atualizarmos a variável de estado `recipientID``, o nosso Hook `useFriendStatus` irá cancelar a subscrição do amigo seleccionado anteriormente, e subscrever para o status do recém-selecionado. 
+Isto nos informa se o amigo *atualmente seleccionado* está online. Se escolhermos um amigo diferente e atualizarmos a variável de estado `recipientID`, o nosso Hook `useFriendStatus` irá cancelar a subscrição do amigo seleccionado anteriormente, e subscrever para o status do recém-selecionado. 
 
 ## `useSuaImaginação()` {#useyourimagination}
 

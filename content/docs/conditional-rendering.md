@@ -8,7 +8,7 @@ redirect_from:
   - "tips/false-in-jsx.html"
 ---
 
-Em React, você pode criar componentes distintos que encapsulam o comportamentamento que você precisa. Então, você pode renderizar apenas alguns dos elementos, dependendo do estado da sua aplicação. 
+Em React, você pode criar componentes distintos que encapsulam o comportamento que você precisa. Então, você pode renderizar apenas alguns dos elementos, dependendo do estado da sua aplicação. 
 
 Renderização condicional em React funciona da mesma forma que condições funcionam em JavaScript. Use operadores de JavaScript  como [`if`](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/if...else) ou [operador condicional](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Operador_Condicional) para criar elementos representando o estado atual, e deixe o React atualizar a UI para corresponde-los.
 
@@ -177,11 +177,10 @@ render() {
   const isLoggedIn = this.state.isLoggedIn;
   return (
     <div>
-      {isLoggedIn ? (
-        <LogoutButton onClick={this.handleLogoutClick} />
-      ) : (
-        <LoginButton onClick={this.handleLoginClick} />
-      )}
+      {isLoggedIn
+        ? <LogoutButton onClick={this.handleLogoutClick} />
+        : <LoginButton onClick={this.handleLoginClick} />
+      }
     </div>
   );
 }
@@ -191,7 +190,7 @@ Assim como em JavaScript, você decide o estilo apropriado com base no que você
 
 ### Evitando que um Componente seja Renderizado {#preventing-component-from-rendering}
 
-Em casos raros você pode desejar que um componente se esconda ainda que ele tenha sido renderizado por outro componente. Para fazer isso, retorne `null` ao invés do resultado renderizarado.
+Em casos raros você pode desejar que um componente se esconda ainda que ele tenha sido renderizado por outro componente. Para fazer isso, retorne `null` ao invés do resultado renderizado.
 
 No exemplo abaixo, o `<WarningBanner />` é renderizado dependendo do valor da prop chamada `warn`. Se o valor da prop é  `false`, o componente não é renderizado:
 
